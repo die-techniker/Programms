@@ -7,14 +7,17 @@ import sys, time
 # Event-Funktionen
 def button1Click() :
 	print("Button „Gut“:\nDas freut mich!")
+	Anzeige2.pack()
 	Button4.pack()
 	Button5.pack()
 def button2Click() :
 	print("Button „Schlecht“:\n Das tut mir leid!")
+	Anzeige2.pack()
 	Button4.pack()
 	Button5.pack()
 def button3Click() :
 	print("Button „Mittel“:\nOK!")
+	Anzeige2.pack()
 	Button4.pack()
 	Button5.pack()
 def button4Click() :
@@ -25,7 +28,8 @@ def button5Click() :
 	print("Button „Und wie geht es dir?”\n",GEFÜHL)
 # Hauptprogramm
 Fenster = Tk()
-Anzeige = Label(Fenster, text="Hallo, wie geht es?")
+Anzeige = Label(Fenster, text="Wie geht es dir?")
+Anzeige2 = Label(Fenster, text="Alle Funktionen")
 Anzeige.pack()
 Button1 = Button(Fenster, text="Gut", command=button1Click)
 Button2 = Button(Fenster, text="Schlecht", command=button2Click)
