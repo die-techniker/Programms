@@ -78,7 +78,7 @@ for zeichen in text:
 #print(f"Es wurde ein Code erzeugt zur einer Zeile in der Angegebenen Datei: {args.file}\n\n{kodierter_text}")
 print(f"\nKnack-den-Code Version 1")
 while not dekodierter_text==text:
-	print(f"\n\n{dekodierter_text}\n{minuse}\n{kodierter_text}\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe> (Dieses Beispiel stimmt nur manchmal.)\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
+	print(f"\n\n{dekodierter_text}\n{minuse}\n{kodierter_text}\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
 	value=input("Eingabe: ")
 	if "=" in value:
 		liste=value.split("=")
