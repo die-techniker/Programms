@@ -60,6 +60,12 @@ for zeichen in text:
 		wert=" "
 	elif code=="\t":
 		wert="\t"
+	elif code=="/":
+		wert="/"
+	elif code=="(":
+		wert="("
+	elif code==")":
+		wert=")"
 	else:
 		wert="_"
 	
