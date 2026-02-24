@@ -1,0 +1,84 @@
+#!/bin/python3
+
+"""
+Was ich machen will:
+- Er soll eine Zeile aus der Datei von Argument 1 eine Zeile auswählen
+- Er soll Kürzel für jeden Buchstaben erstellen 
+"""
+import random
+import argparse
+import os
+import sys
+parser = argparse.ArgumentParser(description='Ein Knack-Den-Code Programm')
+parser.add_argument('--file', required=True, help='Datei zum auswählen von einer Zeile')
+#parser.add_argument('--value', required=True, default="[echo.v] Fehler: Argument --value erforderlich", help='Text in Anführungszeichen ("") angeben')
+args = parser.parse_args()
+
+with open(args.file) as datei:
+	liste=datei.read().strip().split("\n")
+	text=random.choice(liste)
+
+code_zu_zeichen={"ü":"a","ö":"b","ä":"c","z":"d","y":"e","x":"f","w":"g","v":"h","u":"i","t":"j","s":"k","r":"l","q":"m","p":"n","o":"o","n":"p","m":"q","l":"r","k":"s","j":"t","i":"u","h":"v","w":"g","f":"x","e":"y","d":"z","ä":"c","ö":"b","ü":"a"}
+zeichen_zu_code={}
+for code in code_zu_zeichen:
+	zeichen=code_zu_zeichen[code]
+	zeichen_zu_code[zeichen]=code
+
+kodierter_text=""
+dekodierter_text=f""
+minuse=f""
+anzahl_zeichen=0
+for zeichen in text:
+	anzahl_zeichen=anzahl_zeichen+1
+	code=zeichen
+	if zeichen in zeichen_zu_code:
+		code=zeichen_zu_code[zeichen]
+	elif zeichen.lower() in zeichen_zu_code:
+		code=zeichen_zu_code[zeichen.lower()]
+		code=code.upper()
+		#sys.stdout.write
+	kodierter_text=kodierter_text+code
+	wert=f""
+	if code=="!":
+		wert="!"
+	elif code=="?":
+		wert="?"
+	elif code==".":
+		wert="."
+	elif code==" ":
+		wert=" "
+	elif code=="\t":
+		wert="\t"
+	else:
+		wert="_"
+	
+	
+	
+	dekodierter_text=dekodierter_text+wert
+	#minuse=minuse+"-"
+	minuse+="-"
+
+#print(f"Es wurde ein Code erzeugt zur einer Zeile in der Angegebenen Datei: {args.file}\n\n{kodierter_text}")
+print(f"\nKnack-den-Code Version 1")
+while not dekodierter_text==text:
+	print(f"\n\n{dekodierter_text}\n{minuse}\n{kodierter_text}\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: a=j (Dieses Beispiel stimmt nur manchmal.)\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
+	value=input("Eingabe: ")
+	if "=" in value:
+		liste=value.split("=")
+		#print(liste)
+		code=liste[0].lower().strip()
+		zeichen=liste[1].lower().strip()
+
+		if code in code_zu_zeichen and code_zu_zeichen[code]==zeichen:
+			
+			#neues_i=[]
+			for i in range(anzahl_zeichen):
+				#neues_i=neues_i+i
+				#print(neues_i[0])
+				#print(text[i])
+				#print(dekodierter_text[i])
+				if kodierter_text[i]==code:
+					dekodierter_text=dekodierter_text[0:i]+zeichen+dekodierter_text[i+1:]
+				if kodierter_text[i]==code.upper():
+					dekodierter_text=dekodierter_text[0:i]+zeichen.upper()+dekodierter_text[i+1:]
+			print("Richtig geraten!")
