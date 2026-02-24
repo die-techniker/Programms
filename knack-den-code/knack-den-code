@@ -82,3 +82,5 @@ while not dekodierter_text==text:
 				if kodierter_text[i]==code.upper():
 					dekodierter_text=dekodierter_text[0:i]+zeichen.upper()+dekodierter_text[i+1:]
 			print("Richtig geraten!")
+		else:
+			print("Falsch geraten!")
