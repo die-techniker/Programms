@@ -18,7 +18,18 @@ with open(args.file) as datei:
 	liste=datei.read().strip().split("\n")
 	text=random.choice(liste)
 
-code_zu_zeichen={"ü":"a","ö":"b","ä":"c","z":"d","y":"e","x":"f","w":"g","v":"h","u":"i","t":"j","s":"k","r":"l","q":"m","p":"n","o":"o","n":"p","m":"q","l":"r","k":"s","j":"t","i":"u","h":"v","w":"g","f":"x","e":"y","d":"z","ä":"c","ö":"b","ü":"a"}
+#code_zu_zeichen={"ü":"a","ö":"b","ä":"c","z":"d","y":"e","x":"f","w":"g","v":"h","u":"i","t":"j","s":"k","r":"l","q":"m","p":"n","o":"o","n":"p","m":"q","l":"r","k":"s","j":"t","i":"u","h":"v","w":"g","f":"x","e":"y","d":"z","ä":"c","ö":"b","ü":"a"}
+alphabet=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ä","ß","ö","ü"]
+codes=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ä","ß","ö","ü"]
+random.shuffle(codes)
+
+anzahl_codes=len(codes)
+code_zu_zeichen={}
+for i in range(anzahl_codes):
+	#code_zu_zeichen={f'"{alphabet[i]}":"{codes[i]}"'}
+	code=codes[i]
+	code_zu_zeichen[code]=alphabet[i]
+
 zeichen_zu_code={}
 for code in code_zu_zeichen:
 	zeichen=code_zu_zeichen[code]
