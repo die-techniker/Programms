@@ -70,7 +70,7 @@ fehler=0
 versuche=0
 while not dekodierter_text==text:
 	try:
-		print(f"\n\n{dekodierter_text}\n\n{kodierter_text}\n\nAktueller Status:\n\nVersuche: {versuche}\nErkannte Buchstaben: {erkannt}\nFehlversuche: {fehler}\n\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
+		print(f"\n\nAktueller Status:\n\nVersuche: {versuche}\nErkannte Buchstaben: {erkannt}\nFehlversuche: {fehler}\n\n\n\n{dekodierter_text}\n\n{kodierter_text}Gib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
 		value=input("Eingabe: ")
 		versuche=versuche+1
 		if "=" in value:
