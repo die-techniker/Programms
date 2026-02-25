@@ -5,7 +5,7 @@ Was ich machen will:
 - Er soll eine Zeile aus der Datei von Argument 1 eine Zeile auswählen
 - Er soll Kürzel für jeden Buchstaben erstellen 
 """
-import random
+import random,re
 import argparse
 import os
 import sys
@@ -17,6 +17,10 @@ args = parser.parse_args()
 with open(args.file) as datei:
 	liste=datei.read().strip().split("\n")
 	text=random.choice(liste)
+
+# hübsche den text auf (von Papa)
+text=re.sub(r"([!?.]) ",r"\1\n",text).strip()
+text="\n".join([ f"{nr+1}: {line}" for nr,line in enumerate(text.split("\n"))])
 
 #code_zu_zeichen={"ü":"a","ö":"b","ä":"c","z":"d","y":"e","x":"f","w":"g","v":"h","u":"i","t":"j","s":"k","r":"l","q":"m","p":"n","o":"o","n":"p","m":"q","l":"r","k":"s","j":"t","i":"u","h":"v","w":"g","f":"x","e":"y","d":"z","ä":"c","ö":"b","ü":"a"}
 alphabet=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ä","ö","ü","ß"]
@@ -71,7 +75,7 @@ versuche=0
 richtig=0
 while not dekodierter_text==text:
 	try:
-		print(f"\nAktueller Status:\n\nVersuche: {versuche}\nErkannte Buchstaben: {erkannt}\nVersuche mit Erfolg: {richtig}\nFehlversuche: {fehler}\n\n\n\n{dekodierter_text}\n\n{kodierter_text}\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
+		print(f"\nAktueller Status:\n\nVersuche: {versuche}\nErkannte Buchstaben: {erkannt}\nVersuche mit Erfolg: {richtig}\nFehlversuche: {fehler}\n\n\n\n{dekodierter_text}\n\n{kodierter_text}\n\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
 		value=input("Eingabe: ")
 		versuche=versuche+1
 		if "=" in value:
@@ -109,4 +113,4 @@ while not dekodierter_text==text:
 	except Exception:
 		pass
 
-print("SUPER! Du bist fertig!")
+print(f"SUPER! Du bist fertig!\n\nVersuche: {versuche}\nErkannte Buchstaben: {erkannt}\nVersuche mit Erfolg: {richtig}\nFehlversuche: {fehler}\n\nDein Text: \n{dekodierter_text}")
