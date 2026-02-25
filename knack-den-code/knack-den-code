@@ -65,10 +65,14 @@ for zeichen in text:
 
 #print(f"Es wurde ein Code erzeugt zur einer Zeile in der Angegebenen Datei: {args.file}\n\n{kodierter_text}")
 print(f"\nKnack-den-Code Version 1")
+erkannt=0
+fehler=0
+versuche=0
 while not dekodierter_text==text:
 	try:
-		print(f"\n\n{dekodierter_text}\n\n{kodierter_text}\n\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
+		print(f"\n\n{dekodierter_text}\n\n{kodierter_text}\n\nAktueller Status:\n\nVersuche: {versuche}\nErkannte Buchstaben: {erkannt}\nFehlversuche: {fehler}\n\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
 		value=input("Eingabe: ")
+		versuche=versuche+1
 		if "=" in value:
 			liste=value.split("=")
 			#print(liste)
@@ -84,12 +88,16 @@ while not dekodierter_text==text:
 					#print(text[i])
 					#print(dekodierter_text[i])
 					if kodierter_text[i]==code:
+						erkannt=erkannt+1
 						dekodierter_text=dekodierter_text[0:i]+zeichen+dekodierter_text[i+1:]
 					if kodierter_text[i]==code.upper():
+						erkannt=erkannt+1
 						dekodierter_text=dekodierter_text[0:i]+zeichen.upper()+dekodierter_text[i+1:]
+				
 				print("Richtig geraten!")
 			else:
 				print("Falsch geraten!")
+				fehler=fehler+1
 	except KeyboardInterrupt as e:
 		print("\nSkript kann wegen einer unerwarteten Unterbrechung nicht fortgesetzt werden.\nFehlercode: 2\nTschüssi.\n")
 		exit(2)
