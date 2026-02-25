@@ -68,9 +68,10 @@ print(f"\nKnack-den-Code Version 1")
 erkannt=0
 fehler=0
 versuche=0
+richtig=0
 while not dekodierter_text==text:
 	try:
-		print(f"\n\nAktueller Status:\n\nVersuche: {versuche}\nErkannte Buchstaben: {erkannt}\nFehlversuche: {fehler}\n\n\n\n{dekodierter_text}\n\n{kodierter_text}Gib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
+		print(f"\n\nAktueller Status:\n\nVersuche: {versuche}\nErkannte Buchstaben: {erkannt}\nVersuche mit Erfolg: {richtig}\nFehlversuche: {fehler}\n\n\n\n{dekodierter_text}\n\n{kodierter_text}Gib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
 		value=input("Eingabe: ")
 		versuche=versuche+1
 		if "=" in value:
@@ -95,6 +96,7 @@ while not dekodierter_text==text:
 						dekodierter_text=dekodierter_text[0:i]+zeichen.upper()+dekodierter_text[i+1:]
 				
 				print("Richtig geraten!")
+				richtig=richtig+1
 			else:
 				print("Falsch geraten!")
 				fehler=fehler+1
