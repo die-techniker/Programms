@@ -19,8 +19,8 @@ with open(args.file) as datei:
 	text=random.choice(liste)
 
 #code_zu_zeichen={"ü":"a","ö":"b","ä":"c","z":"d","y":"e","x":"f","w":"g","v":"h","u":"i","t":"j","s":"k","r":"l","q":"m","p":"n","o":"o","n":"p","m":"q","l":"r","k":"s","j":"t","i":"u","h":"v","w":"g","f":"x","e":"y","d":"z","ä":"c","ö":"b","ü":"a"}
-alphabet=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ä","ß","ö","ü"]
-codes=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ä","ß","ö","ü"]
+alphabet=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ä","ö","ü","ß"]
+codes=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","ä","ö","ü","ß"]
 random.shuffle(codes)
 
 anzahl_codes=len(codes)
@@ -50,28 +50,12 @@ for zeichen in text:
 		#sys.stdout.write
 	kodierter_text=kodierter_text+code
 	wert=f""
-	if code=="!":
-		wert="!"
-	elif code=="?":
-		wert="?"
-	elif code==".":
-		wert="."
-	elif code==" ":
-		wert=" "
-	elif code=="\t":
-		wert="\t"
-	elif code=="/":
-		wert="/"
-	elif code=="(":
-		wert="("
-	elif code==")":
-		wert=")"
-	elif code=="-":
-		wert="-"
-	elif code=="_":
+	if zeichen in alphabet:
+		wert="_"
+	elif zeichen.lower() in alphabet:
 		wert="_"
 	else:
-		wert="_"
+		wert=zeichen
 	
 	
 	
@@ -82,26 +66,37 @@ for zeichen in text:
 #print(f"Es wurde ein Code erzeugt zur einer Zeile in der Angegebenen Datei: {args.file}\n\n{kodierter_text}")
 print(f"\nKnack-den-Code Version 1")
 while not dekodierter_text==text:
-	print(f"\n\n{dekodierter_text}\n{minuse}\n{kodierter_text}\n\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
-	value=input("Eingabe: ")
-	if "=" in value:
-		liste=value.split("=")
-		#print(liste)
-		code=liste[0].lower().strip()
-		zeichen=liste[1].lower().strip()
+	try:
+		print(f"\n\n{dekodierter_text}\n\n{kodierter_text}\n\nGib nun einen Codebuchstaben und den richtigen Buchstaben ein. Beispiel: <Code>=<Buchstabe>\nIn diesem Text befinden sich {anzahl_zeichen} Zeichen.")
+		value=input("Eingabe: ")
+		if "=" in value:
+			liste=value.split("=")
+			#print(liste)
+			code=liste[0].lower().strip()
+			zeichen=liste[1].lower().strip()
 
-		if code in code_zu_zeichen and code_zu_zeichen[code]==zeichen:
-			
-			#neues_i=[]
-			for i in range(anzahl_zeichen):
-				#neues_i=neues_i+i
-				#print(neues_i[0])
-				#print(text[i])
-				#print(dekodierter_text[i])
-				if kodierter_text[i]==code:
-					dekodierter_text=dekodierter_text[0:i]+zeichen+dekodierter_text[i+1:]
-				if kodierter_text[i]==code.upper():
-					dekodierter_text=dekodierter_text[0:i]+zeichen.upper()+dekodierter_text[i+1:]
-			print("Richtig geraten!")
-		else:
-			print("Falsch geraten!")
+			if code in code_zu_zeichen and code_zu_zeichen[code]==zeichen:
+				
+				#neues_i=[]
+				for i in range(anzahl_zeichen):
+					#neues_i=neues_i+i
+					#print(neues_i[0])
+					#print(text[i])
+					#print(dekodierter_text[i])
+					if kodierter_text[i]==code:
+						dekodierter_text=dekodierter_text[0:i]+zeichen+dekodierter_text[i+1:]
+					if kodierter_text[i]==code.upper():
+						dekodierter_text=dekodierter_text[0:i]+zeichen.upper()+dekodierter_text[i+1:]
+				print("Richtig geraten!")
+			else:
+				print("Falsch geraten!")
+	except KeyboardInterrupt as e:
+		print("\nSkript kann wegen einer unerwarteten Unterbrechung nicht fortgesetzt werden.\nFehlercode: 2\nTschüssi.\n")
+		exit(2)
+	except EOFError as e:
+		print("\nSkript kann wegen einer unerwarteten Unterbrechung nicht fortgesetzt werden.\nFehlercode: 1\nTschüssi.\n")
+		exit(1)
+	except Exception:
+		pass
+
+print("SUPER! Du bist fertig!")
